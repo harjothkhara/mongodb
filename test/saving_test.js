@@ -6,7 +6,7 @@ describe('Saving records', () => {
   // create tests
   it('Saves a record to the database', (done) => {
 
-    const char = new MarioChar({
+    const char = new MarioChar({ //unique key every time saved to the db - or test is run.
       name: 'Mario'
     });
 
