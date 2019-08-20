@@ -15,3 +15,11 @@ before((done) => {
     console.log('Connection error:', error)
   });
 });
+
+//Drop(delete)the characters collection before each test
+beforeEach((done) => {
+  //drop the collection
+  mongoose.connection.collections.mariochars.drop(() => {
+    done();
+  }); //references all the collections we have in our db - right now just mariochars - remember mongo pluralizes our model
+});
