@@ -8,7 +8,8 @@ let char;
   beforeEach((done) =>{
     //creating a character
     char = new MarioChar({ //unique key every time saved to the db - or test is run.
-      name: 'Mario'
+      name: 'Mario',
+      weight: 50
     });
     //saving it to the database
     char.save().then(() => { //async request with a promise
@@ -24,6 +25,16 @@ let char;
         done();
       });
     });
+  });
+  it('Increment the weight by 1 record in the database', (done) => {
+    MarioChar.update({},{$inc:{weight:1}})// update operator which means increment
+      .then(() => {
+        MarioChar.findOne({name:'Mario'})
+        .then((record) => {
+          assert(record.weight === 51);
+          done();
+        })
+      })
   });
   //next test
 });
